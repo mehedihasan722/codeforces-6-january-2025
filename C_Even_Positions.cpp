@@ -1,7 +1,7 @@
 /*
  *       Author :   Mehedi Hasan 
- *       Created:   Mon 06.Jan.2025 08:21:49
- *       File   :   A_Find_K_Distinct_Points_with_Fixed_Center.cpp
+ *       Created:   Mon 06.Jan.2025 09:11:51
+ *       File   :   C_Even_Positions.cpp
 */
 
 #include <bits/stdc++.h>
@@ -203,13 +203,24 @@ int n,m;
 
 void solve() 
 {
-    int xc, yc, k;
-    read(xc, yc, k);
-    xc -= (k+1);
-    FOR(k) {
-        xc += 2;
-        print(xc, yc);
+    read(n);
+    string s;
+    read(s);
+    ll ans = 0;
+    deque<int> bracketPositions;
+    FOR(n) {
+        char ch = s[i];
+        if(ch == '_') {
+            ch = bracketPositions.empty() ? '(' : ')';
+        }
+        if(ch == '(') {
+            bracketPositions.push_back(i);
+        } else {
+            ans += i - bracketPositions.back();
+            bracketPositions.pop_back();
+        }
     }
+    print(ans);
 }
 
 int main() {
